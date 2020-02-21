@@ -1,0 +1,176 @@
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bidvestbank        |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use BidvestBank;
+Database changed
+mysql> create table BankBranch(
+    -> branch_name VARCHAR(30), not null,
+    -> branch_city VARCHAR(30), NOT NULL,
+    -> assets double);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null,
+branch_city VARCHAR(30), NOT NULL,
+assets double)' at line 2
+mysql> use BidvestBank;
+Database changed
+mysql> CREATE TABLE BankBranch (
+    -> branch_name varchar(30),
+    -> branch_city varchar(30),
+    -> assets double
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> show tables;
++-----------------------+
+| Tables_in_bidvestbank |
++-----------------------+
+| bankbranch            |
++-----------------------+
+1 row in set (0.01 sec)
+
+mysql> create table Customer (
+    -> customer_name varchar(30),
+    -> customer_street varchar(30),
+    -> customer_city varchar(30)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table CustomerAccount (
+    -> account_number char(5) not null primary key,
+    -> branch_name varchar(10),
+    -> balance double
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
++-----------------------+
+| Tables_in_bidvestbank |
++-----------------------+
+| bankbranch            |
+| customer              |
+| customeraccount       |
++-----------------------+
+3 rows in set (0.00 sec)
+
+mysql> create table Loan (
+    -> loan_number double,
+    -> branch_name varchar(10),
+    -> amount double
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create table Depositor (
+    -> customer_name varchar(30),
+    -> account_number char(5), not null primary key
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null primary key
+)' at line 3
+mysql>  create table Depositor (
+    ->  customer_name varchar(30),
+    ->  account_number char(5), not null
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'not null
+)' at line 3
+mysql>  create table Depositor (
+    ->  customer_name varchar(30),
+    ->   account_number char(5));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql>   create table Borrower (
+    ->   customer_name varchar(30),
+    ->  branch_name varchar(10),
+    -> salary double );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql>  create table Employee (
+    ->  employee_name varchar(30),
+    ->  branch_name varchar(10),
+    -> salary double);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
++-----------------------+
+| Tables_in_bidvestbank |
++-----------------------+
+| bankbranch            |
+| borrower              |
+| customer              |
+| customeraccount       |
+| depositor             |
+| employee              |
+| loan                  |
++-----------------------+
+7 rows in set (0.00 sec)
+
+mysql>
+mysql> use BidvestBank;
+Database changed
+mysql> insert into BankBranch values ('Midrand','Johannesburg',7100000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql>  insert into BankBranch values ('Newtown','Johannesburg',900000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into BankBranch values ('Mabopane,'Pretoria',400000);
+    '>  insert into BankBranch values ('Belgravia,'Kimberly',37000000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Pretoria',400000);
+ insert into BankBranch values ('Belgravia,'Kimberly',3700000' at line 1
+mysql>  insert into BankBranch values ('Belgravia,'Kimberly',3700000);
+    '> insert into BankBranch values ('Belgravia,'Kimberly',3700000);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Kimberly',3700000);
+insert into BankBranch values ('Belgravia,'Kimberly',3700000' at line 1
+mysql> insert into BankBranch values ('Belgravia','Kimberly',3700000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into BankBranch values ('Belgravia','Kimberly',3700000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into BankBranch values ('Amanzimtoti','Durban',300000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into BankBranch values ('Universitas','Bloemfontein',2100000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into BankBranch values ('Mamelodi','Pretoria',8000000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> show tables;
++-----------------------+
+| Tables_in_bidvestbank |
++-----------------------+
+| bankbranch            |
+| borrower              |
+| customer              |
+| customeraccount       |
+| depositor             |
+| employee              |
+| loan                  |
++-----------------------+
+7 rows in set (0.00 sec)
+
+mysql> show * from bankbranch;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '* from bankbranch' at line 1
+mysql> select * from bankbranch;
++-------------+--------------+---------+
+| branch_name | branch_city  | assets  |
++-------------+--------------+---------+
+| Midrand     | Johannesburg | 7100000 |
+| Newtown     | Johannesburg |  900000 |
+| Belgravia   | Kimberly     | 3700000 |
+| Belgravia   | Kimberly     | 3700000 |
+| Amanzimtoti | Durban       |  300000 |
+| Universitas | Bloemfontein | 2100000 |
+| Mamelodi    | Pretoria     | 8000000 |
++-------------+--------------+---------+
+7 rows in set (0.00 sec)
+
+mysql>
