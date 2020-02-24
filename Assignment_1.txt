@@ -151,4 +151,333 @@ mysql> select * from bankbranch;
 +-------------+--------------+---------+
 7 rows in set (0.00 sec)
 
+Enter password: ****
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 9
+Server version: 8.0.19 MySQL Community Server - GPL
+
+Copyright (c) 2000, 2020, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> show databases;
++--------------------+
+| Database           |
++--------------------+
+| bidvestbank        |
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+5 rows in set (0.00 sec)
+
+mysql> use BidvestBank;
+Database changed
+mysql> CREATE TABLE BankBranch (
+    -> branch_name varchar(30),
+    -> branch_city varchar(30),
+    -> branch_city varchar(30),
+    -> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 5
+mysql> CREATE TABLE BankBranch (
+    -> branch_name varchar(30),
+    -> branch_city varchar(30),
+    -> assets double);
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> create table Customer (
+    -> customer_name varchar(30),
+    -> customer_street varchar(30),
+    -> customer_city varchar(30));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table CustomerAccount (
+    -> account_number char(5) not null primary key,
+    -> account_number char(5) not null primary key,
+    -> balance double);
+ERROR 1060 (42S21): Duplicate column name 'account_number'
+mysql> create table CustomerAccount (
+    -> account_number char(5) not null primary key,
+    -> branch_name varchar(10),balance double
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table Loan (
+    ->  loan_number double,
+    -> branch_name varchar(10),
+    ->  amount double);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table Depositor (
+    -> customer_name varchar(30), account_number char(5));
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table Borrower (
+    ->  customer_name varchar(30),
+    -> branch_name varchar(10),
+    ->  salary double );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table Employee (
+    -> employee_name varchar(30),
+    -> branch_name varchar(10),
+    -> salary double);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> show tables;
++-----------------------+
+| Tables_in_bidvestbank |
++-----------------------+
+| bankbranch            |
+| borrower              |
+| customer              |
+| customeraccount       |
+| depositor             |
+| employee              |
+| loan                  |
++-----------------------+
+7 rows in set (0.01 sec)
+
+mysql> use bidvestbank;
+Database changed
+mysql> insert into BankBranch values ('Midrand','Johannesburg',7100000);
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into BankBranch values ('Newtown','Johannesburg',900000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into BankBranch values ('Belgravia','Kimberly',3700000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into BankBranch values ('Amanzimtoti','Durban',300000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into BankBranch values ('Universitas','Bloemfontein',2100000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into BankBranch values ('Mamelodi','Pretoria',8000000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from bankbranch;
++-------------+--------------+---------+
+| branch_name | branch_city  | assets  |
++-------------+--------------+---------+
+| Midrand     | Johannesburg | 7100000 |
+| Newtown     | Johannesburg |  900000 |
+| Belgravia   | Kimberly     | 3700000 |
+| Amanzimtoti | Durban       |  300000 |
+| Universitas | Bloemfontein | 2100000 |
+| Mamelodi    | Pretoria     | 8000000 |
++-------------+--------------+---------+
+6 rows in set (0.00 sec)
+
+mysql> use bidvestbank;
+Database changed
+mysql> insert into CustomerAccount values ('A-5324','Newtown',500);
+ERROR 1406 (22001): Data too long for column 'account_number' at row 1
+mysql> create table CustomerAccount (
+    -> account_number char(10),
+    -> branch_name varchar(10),
+    -> balance double);
+ERROR 1050 (42S01): Table 'customeraccount' already exists
+mysql> alter table Customer_account
+    -> add account_number char(10),
+    -> add branch_name varchar(10),
+    -> balance double);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'balance double)' at line 4
+mysql> insert into Customer values ('Modise','Spring',George);
+ERROR 1054 (42S22): Unknown column 'George' in 'field list'
+mysql> insert into Depositor values ('Johnson','A-5624');
+ERROR 1406 (22001): Data too long for column 'account_number' at row 1
+mysql> insert into Depositor values ('Johnson','A-5624');
+ERROR 1406 (22001): Data too long for column 'account_number' at row 1
+mysql> insert into Depositor values ('Johnson','A-5624');
+ERROR 1406 (22001): Data too long for column 'account_number' at row 1
+mysql> );
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ')' at line 1
+mysql> insert into Depositor values ('Johnson','A-5624');
+ERROR 1406 (22001): Data too long for column 'account_number' at row 1
+mysql> delete table bankbranch;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'table bankbranch' at line 1
+mysql> delete bankbrranch from bidvestbank;
+ERROR 1109 (42S02): Unknown table 'bankbrranch' in MULTI DELETE
+mysql> delete bankbranch from bidvestbank;
+ERROR 1109 (42S02): Unknown table 'bankbranch' in MULTI DELETE
+mysql> prompt.replace bankbranch;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'prompt.replace bankbranch' at line 1
+mysql> prompt.replace BankBranch
+    -> drop table bankbranch;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'prompt.replace BankBranch
+drop table bankbranch' at line 1
+mysql> ;
+ERROR:
+No query specified
+
+mysql> drop table bankbranch;
+Query OK, 0 rows affected (0.07 sec)
+
+mysql> show tables;
++-----------------------+
+| Tables_in_bidvestbank |
++-----------------------+
+| borrower              |
+| customer              |
+| customeraccount       |
+| depositor             |
+| employee              |
+| loan                  |
++-----------------------+
+6 rows in set (0.00 sec)
+
+mysql> create table bankbranch (
+    -> drop table customeraccount;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'drop table customeraccount' at line 2
+mysql> drop table customeraccount;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> show tables;
++-----------------------+
+| Tables_in_bidvestbank |
++-----------------------+
+| borrower              |
+| customer              |
+| depositor             |
+| employee              |
+| loan                  |
++-----------------------+
+5 rows in set (0.00 sec)
+
+mysql> create tabCREATE TABLE BankBranch (
+    -> branch_name varchar(30),
+    -> branch_city varchar(30),
+    -> assets double);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'tabCREATE TABLE BankBranch (
+branch_name varchar(30),
+branch_city varchar(30),
+a' at line 1
+mysql>  CREATE TABLE BankBranch (
+    -> branch_name varchar(30),
+    ->  branch_city varchar(30),
+    -> assets double);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> create table CustomerAccount (
+    ->  account_number char(10) not null primary key,
+    -> branch_name varchar(20),
+    -> balance double;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 4
+mysql> create table CustomerAccount (
+    ->  account_number char(10) not null primary key,
+    -> branch_name varchar(20),
+    -> balance double);
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into BankBranch values ('Midrand','Johannesburg',7100000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into BankBranch values ('Newtown','Johannesburg',900000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into BankBranch values ('Belgravia','Kimberly',3700000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into BankBranch values ('Belgravia','Kimberly',3700000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into BankBranch values ('Belgravia','Kimberly',3700000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql>  insert into BankBranch values ('Universitas','Bloemfontein',2100000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into BankBranch values ('Mamelodi','Pretoria',8000000);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Customeraccount values ('A-5324','Newtown',500);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Customeraccount values ('A-5624','Sunnyside',400);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Customeraccount values ('A-7749','Midrand',900);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Customeraccount values ('A-4467','Mabopane',700);
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Customer values ('Modise','Spring','George');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Customer values ('Brooks','Senator','Johannesburg');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Customer values ('Jooste','Noth','kimberly');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Customer values ('Williams','Nassau','Giyane');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Depositor values ('Johnson','A-5624');
+ERROR 1406 (22001): Data too long for column 'account_number' at row 1
+mysql> insert into Depositor values ('Johnson','A-5624');;
+ERROR 1406 (22001): Data too long for column 'account_number' at row 1
+ERROR:
+No query specified
+
+mysql> insert into Depositor values ('Johnson','A-5624')
+    -> ;
+ERROR 1406 (22001): Data too long for column 'account_number' at row 1
+mysql> drop table depositor;
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> crecreate table Depositor (
+    -> customer_name varchar(30),
+    -> account_number char(10));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'crecreate table Depositor (
+customer_name varchar(30),
+account_number char(10))' at line 1
+mysql> create table Depositor (
+    ->  customer_name varchar(30),
+    -> account_number char(5));
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> insert into Depositor values ('Johnson','A-5624');
+ERROR 1406 (22001): Data too long for column 'account_number' at row 1
+mysql> drop table depositor;
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> create table Depositor (
+    -> customer_name varchar(30),
+    ->  account_number  char(10));
+Query OK, 0 rows affected (0.05 sec)
+
 mysql>
+mysql> insert into Depositor values ('Johnson','A-5624');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Depositor values ('Johnson','A-5624');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> insert into Depositor values ('Zwane','A-3546');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> insert into Depositor values ('Dlamini','A-2542');
+Query OK, 1 row affected (0.01 sec)
+
+mysql> select * from customer accounts where balance < 700;
+ERROR 1054 (42S22): Unknown column 'balance' in 'where clause'
+mysql> select * from CustomerAccount where balance < 700;
++----------------+-------------+---------+
+| account_number | branch_name | balance |
++----------------+-------------+---------+
+| A-5324         | Newtown     |     500 |
+| A-5624         | Sunnyside   |     400 |
++----------------+-------------+---------+
+2 rows in set (0.00 sec)
+
+
